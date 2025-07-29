@@ -64,7 +64,7 @@ templates/
    python app.py
    ```
 4. **Access the app:**
-   Open your browser and go to `http://localhost:5000`
+   Open your browser and go to link mentioned as local host.
 
 ## Requirements
 - Python 3.x
