@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block title %}Our Services{% endblock %}
+
+{% block content %}
+<section class="services">
+    <div class="container">
+        <h2>Our Services</h2>
+        
+        <div class="service-grid">
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-bolt"></i>
+                </div>
+                <h3>Instant Fault Prediction</h3>
+                <p>Quickly check for potential faults with our simple X/Y/Z input system.</p>
+                <a href="{{ url_for('predictor') }}" class="btn-small">Try Now</a>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <h3>Print Optimization</h3>
+                <p>Get recommendations for optimal printing settings based on your inputs.</p>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-graduation-cap"></i>
+                </div>
+                <h3>Training Workshops</h3>
+                <p>Learn how to improve your 3D printing success rate with our workshops.</p>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-cogs"></i>
+                </div>
+                <h3>Custom Solutions</h3>
+                <p>Enterprise solutions for industrial-scale 3D printing operations.</p>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

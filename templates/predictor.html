@@ -1,0 +1,147 @@
+{% extends "base.html" %}
+
+{% block title %}Fault Scanner | PrintSentry 3D{% endblock %}
+
+{% block content %}
+<section class="predictor">
+    <div class="container">
+        <div class="predictor-container">
+            <div class="predictor-title">
+                <h2>3D Printer Fault Scanner</h2>
+                <p>Enter your printer's axis values to detect potential issues before they affect your print</p>
+            </div>
+            
+            <form id="prediction-form" class="prediction-form">
+                <div class="form-group">
+                    <label for="x">X-Axis Value (mm):</label>
+                    <input type="number" id="x" name="x" step="0.01" class="form-control" required placeholder="0.00">
+                </div>
+                
+                <div class="form-group">
+                    <label for="y">Y-Axis Value (mm):</label>
+                    <input type="number" id="y" name="y" step="0.01" class="form-control" required placeholder="0.00">
+                </div>
+                
+                <div class="form-group">
+                    <label for="z">Z-Axis Value (mm):</label>
+                    <input type="number" id="z" name="z" step="0.01" class="form-control" required placeholder="0.00">
+                </div>
+                
+                <button type="submit" class="btn btn-primary">Scan for Faults</button>
+            </form>
+            
+            <div id="result-container" class="result-container">
+                <div id="prediction-result"></div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const form = document.getElementById('prediction-form');
+        const resultContainer = document.getElementById('result-container');
+        const resultDiv = document.getElementById('prediction-result');
+        
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Show loading state
+            resultDiv.innerHTML = `
+                <div class="loading-result">
+                    <i class="fas fa-spinner fa-spin"></i>
+                    <span>Analyzing printer movements...</span>
+                </div>
+            `;
+            resultContainer.style.display = 'block';
+            
+            // Get form data
+            const formData = {
+                x: document.getElementById('x').value,
+                y: document.getElementById('y').value,
+                z: document.getElementById('z').value
+            };
+            
+            // Simulate API call (replace with actual fetch to your backend)
+            setTimeout(() => {
+                // This is a simulation - replace with actual fetch call
+                // fetch('/predict', {
+                //     method: 'POST',
+                //     headers: { 'Content-Type': 'application/json' },
+                //     body: JSON.stringify(formData)
+                // })
+                // .then(response => response.json())
+                // .then(data => displayResult(data))
+                // .catch(error => displayError(error));
+                
+                // For demo purposes, we'll simulate a response
+                const randomResult = Math.random() > 0.5 ? 'Yes' : 'No';
+                const simulatedResponse = {
+                    result: randomResult,
+                    message: randomResult === 'Yes' 
+                        ? 'Our analysis detected potential issues with your printer\'s movements.' 
+                        : 'No significant issues detected in your printer\'s movements.',
+                    confidence: (Math.random() * 30 + 70).toFixed(1)
+                };
+                
+                displayResult(simulatedResponse);
+            }, 1500);
+        });
+        
+        function displayResult(data) {
+            if (data.result === 'Yes') {
+                resultDiv.innerHTML = `
+                    <div class="result-header">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <span>Fault Detected! (${data.confidence}% confidence)</span>
+                    </div>
+                    <div class="result-message">${data.message}</div>
+                    <div class="result-advice">
+                        <strong>Recommended Actions:</strong>
+                        <ul>
+                            <li>Check belt tension and pulley alignment</li>
+                            <li>Verify stepper motor connections</li>
+                            <li>Inspect rails and bearings for obstructions</li>
+                            <li>Calibrate your printer's steps/mm</li>
+                        </ul>
+                    </div>
+                `;
+                resultContainer.className = 'result-container problem-result';
+            } else {
+                resultDiv.innerHTML = `
+                    <div class="result-header">
+                        <i class="fas fa-check-circle"></i>
+                        <span>No Issues Found (${data.confidence}% confidence)</span>
+                    </div>
+                    <div class="result-message">${data.message}</div>
+                    <div class="result-advice">
+                        Your printer's axis movements appear normal. For best results:
+                        <ul>
+                            <li>Monitor first layers for quality</li>
+                            <li>Perform regular maintenance checks</li>
+                            <li>Keep your firmware updated</li>
+                        </ul>
+                    </div>
+                `;
+                resultContainer.className = 'result-container no-problem-result';
+            }
+        }
+        
+        function displayError(error) {
+            resultDiv.innerHTML = `
+                <div class="result-header">
+                    <i class="fas fa-exclamation-circle"></i>
+                    <span>Error</span>
+                </div>
+                <div class="result-message">${error.message || 'An error occurred while processing your request.'}</div>
+                <div class="result-advice">
+                    Please try again or contact support if the issue persists.
+                </div>
+            `;
+            resultContainer.className = 'result-container error-result';
+        }
+    });
+</script>
+{% endblock %}

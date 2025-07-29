@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block title %}About Us{% endblock %}
+
+{% block content %}
+<section class="about">
+    <div class="container">
+        <div class="about-content">
+            <div class="about-text">
+                <h2>About Our Fault Prediction System</h2>
+                <p>Our mission is to help 3D printing enthusiasts and professionals avoid costly and time-consuming print failures through our advanced prediction technology.</p>
+                
+                <h3>Our Technology</h3>
+                <p>Using machine learning algorithms trained on thousands of printing scenarios, our system can accurately predict potential faults based on just three simple inputs.</p>
+                
+                <h3>The Team</h3>
+                <p>We're a group of 3D printing experts, mechanical engineers, and data scientists passionate about making 3D printing more reliable.</p>
+            </div>
+            <div class="about-image">
+                <img src="{{ url_for('static', filename='images/about-img.jpg') }}" alt="Our 3D Printing Lab">
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="stats">
+    <div class="container">
+        <div class="stat-grid">
+            <div class="stat-item">
+                <div class="stat-number" data-count="92">0</div>
+                <div class="stat-label">Prediction Accuracy</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" data-count="5000">0</div>
+                <div class="stat-label">Prints Analyzed</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" data-count="15">0</div>
+                <div class="stat-label">Printer Models Supported</div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    // Animate counting numbers
+    document.addEventListener('DOMContentLoaded', function() {
+        const statNumbers = document.querySelectorAll('.stat-number');
+        
+        statNumbers.forEach(stat => {
+            const target = parseInt(stat.getAttribute('data-count'));
+            const suffix = stat.textContent.includes('%') ? '%' : '+';
+            const duration = 2000;
+            const step = target / (duration / 16);
+            
+            let current = 0;
+            const timer = setInterval(() => {
+                current += step;
+                if (current >= target) {
+                    clearInterval(timer);
+                    current = target;
+                }
+                stat.textContent = Math.floor(current) + (suffix === '%' ? '%' : '');
+            }, 16);
+        });
+    });
+</script>
+{% endblock %}

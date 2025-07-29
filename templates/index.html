@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+
+{% block title %}Home | PrintSentry 3D{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <div class="container">
+        <div class="hero-content">
+            <h1>Prevent 3D Printing Failures Before They Happen</h1>
+            <p>Our advanced fault prediction system analyzes your printer's movements to detect potential issues before they ruin your print.</p>
+            <a href="{{ url_for('predictor') }}" class="btn btn-primary">Try Fault Scanner Now</a>
+        </div>
+    </div>
+</section>
+
+<section class="features">
+    <div class="container">
+        <div class="section-title">
+            <h2>How It Works</h2>
+            <p>Our system uses machine learning to analyze your 3D printer's axis movements and predict potential failures</p>
+        </div>
+        
+        <div class="feature-grid">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-ruler-combined"></i>
+                </div>
+                <h3>Input Dimensions</h3>
+                <p>Simply enter your X, Y, and Z axis values from your 3D printer's movements.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-brain"></i>
+                </div>
+                <h3>AI Analysis</h3>
+                <p>Our trained machine learning model analyzes the values for potential faults.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <h3>Get Results</h3>
+                <p>Receive an instant prediction about potential printing issues with recommended actions.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="testimonials">
+    <div class="container">
+        <div class="section-title">
+            <h2>What Our Users Say</h2>
+            <p>Don't just take our word for it - hear from our satisfied users</p>
+        </div>
+        
+        <div class="testimonial-slider">
+            <div class="testimonial">
+                <p>"This tool saved me from 3 failed prints in the first week alone! The predictions are incredibly accurate."</p>
+                <div class="author">- John D., Prototyping Lab</div>
+            </div>
+            
+            <div class="testimonial">
+                <p>"The simple X/Y/Z input makes it so easy to use, and the predictions have saved us countless hours of troubleshooting."</p>
+                <div class="author">- Sarah M., University Research Team</div>
+            </div>
+            
+            <div class="testimonial">
+                <p>"As a 3D printing business, this tool has reduced our material waste by over 30%. Highly recommended!"</p>
+                <div class="author">- Michael T., 3D Printing Studio</div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    // Initialize testimonial slider
+    document.addEventListener('DOMContentLoaded', function() {
+        // Simple testimonial slider functionality
+        const testimonials = document.querySelectorAll('.testimonial');
+        let currentIndex = 0;
+        
+        function showTestimonial(index) {
+            testimonials.forEach(testimonial => {
+                testimonial.style.display = 'none';
+            });
+            testimonials[index].style.display = 'block';
+        }
+        
+        // Show first testimonial initially
+        showTestimonial(currentIndex);
+        
+        // Auto-rotate testimonials every 5 seconds
+        setInterval(() => {
+            currentIndex = (currentIndex + 1) % testimonials.length;
+            showTestimonial(currentIndex);
+        }, 5000);
+    });
+</script>
+{% endblock %}
