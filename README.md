@@ -52,8 +52,8 @@ templates/
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/yourusername/printsentry3d.git
-   cd printsentry3d
+   git clone https://github.com/gaurav0970/3D-Printer-Material-Prediction-Using-Machine-Learning.git
+   cd 3D-Printer-Material-Prediction-Using-Machine-Learning
    ```
 2. **Install dependencies:**
    ```bash
@@ -75,8 +75,3 @@ templates/
 ## Contributing
 Contributions are welcome! Please open issues or submit pull requests for improvements.
 
-## License
-This project is licensed under the MIT License.
-
-## Contact
-For support, contact: support@printsentry3d.com
